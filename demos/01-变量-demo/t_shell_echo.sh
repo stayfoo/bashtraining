@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # echo 指令 ， 用于字符串的输出。
 
 # 1、 显示普通字符串 ：
@@ -29,7 +31,7 @@ echo "It is a test"
 
 
 # 6、 显示结果定向至文件
-echo "It is a test!" > myfile
+# echo "It is a test!" > myfile  
 
 
 # 7、 原样输出字符串，不进行转义或取变量（用单引号）
