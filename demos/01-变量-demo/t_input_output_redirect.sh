@@ -33,6 +33,54 @@
 
 # 2、 输入重定向
 
+# 同输出重定向 ， Unix 命令也可以从文件获取输入， 语法为：
+# command1 < file1
+
+# 本来需要从键盘获取输入的命令会转移到文件读取内容。 
+# 注意： 输出重定向是大于号 > , 输入重定向是小于号 < .
 
 
+
+
+# 3、 重定向深入：
+
+# 一般情况下， 每个 Unix / Linux 命令运行时都会打开三个文件：
+#    标准输入文件 （ stdin ） ： stdin 的文件描述符为 0 ， Unix 程序默认从 stdin 读取数据。 
+#    标准输出文件 （ stdout ） ： stdout 的文件描述符为 1 ， Unix 程序默认向 stdout 输出数据。
+#    标准错误文件 （ stderr ） ： stderr 的文件描述符为 2 ， Unix 程序会向 stderr 流中写入错误信息。
+
+# 默认情况向， command > file 将 stdout 重定向到 file , command < file 将 stdin 重定向到 file .
+
+# 如果希望 stderr 重定向到 file ， 可以这样写 ： 
+# command 2 > file 
+# 如果希望 stderr 追加到 file 文件末尾， 可以这样写： 
+# command 2 >> file
+#   2 : 表示标准错误文件 （ stderr ）
+
+# 如果希望将 stdout 和 stderr 合并后重定向到 file ， 可以这样写： 
+# command > file 2>&1
+# 或者
+# command >> file 2>&1
+
+# 如果希望对 stdin 和 stdout 都重定向， 可以这样写： 
+# command < file1 >file2
+# command 命令将 stdin 重定向到 file1 , 将 stdout 重定向到 file2 .
+
+
+
+# 4、 Here Document
+
+# Here Document 是 Shell 中的一种特殊的重定向方式， 用来将输入重定向到一个交互式 Shell 脚本或程序 。
+# 形式如下：
+# command << delimiter
+#   document
+# delimiter
+
+# 作用： 将两个 delimiter 之间的内容 （ document ） 作为输入传递给 command .
+# 注意： 
+#  结尾的 delimiter 一定要顶格写， 前面不能有任何字符， 后面也不能有任何字符， 包括空格和 tab 缩进。
+#  开始的 delimiter 前后的空格会被忽略掉。
+
+
+# 
 
