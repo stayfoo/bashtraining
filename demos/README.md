@@ -246,5 +246,80 @@ $0, $1, $2, ...   :  表示系统传给脚本程序 或 脚本程序传给函数
 
 
 
+`BASH` 中对返回值的处理 ：
+
+无论是在 `Shell` 中对脚本返回值的处理， 还是在脚本中对函数返回值的处理， 都是通过 `$?` 系统变量来获得。 
+`Bash` 要求返回值必须为一个整数， 不能用 return 语句返回字符串常量。 
+
+
+用 Bash 设计简单的用户界面 ：
+
+Bash 中提供了一个小的语句格式， 可以让程序快速的设计一个字符界面的用户交互选择的菜单， 
+该功能就是由 select 语句来实现的， select 语句的语法为： 
+
+```bash
+select var in
+    
+    do
+    statments use $var
+    done
+```
+
+
+```bash
+#!/bin/bash
+
+OPTIONS="Hello Quit"
+select opt in $OPTIONS 
+do
+    if [ "$opt" = "Quit" ]
+    then
+        echo done
+        exit
+    elif [ "$opt" = "Hello" ]
+    then
+        echo Hello World
+    else
+        clear
+        echo bad option
+    fi
+done
+
+exit 0
+```
+
+
+
+```
+$ chmod +x ./t_user_interface.sh 
+$ ./t_user_interface.sh 
+1) Hello
+2) Quit
+#? 
+```
+
+
+在 bash 中读取用户输入 ：
+
+`Bash` 中通过 `read` 函数来实现读取用户输入的功能， 如：
+
+```bash
+#!/bin/bash
+
+echo Please enter your name
+read NAME
+echo "Hi! $NAME !"
+
+exit 0
+
+# 读取用户的输入， 并回显在屏幕上。
+```
+
+
+
+
+
+
+
 # 2、 小练习
 
