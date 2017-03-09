@@ -360,7 +360,66 @@ trap 语句必须作为继 "#!/bin/bash" 后的第一句非注释代码，
 
 
 
+文件分界符： (`EOF`)
 
+>`EOF`： 文件分界符紧跟在`<<`符号后，
+>意思是：分界符后的内容将被当做标准输入传给 `<<` 前面的命令， 直到再次在独立的一行遇到这个文件分界符。
+>
+>`cat`命令： 用来实现一些多行的屏幕输入或者创建一些临时文件  
+
+```bash
+# 多行输入 
+$ cat<<EOF
+> EOF：文件分界符紧跟在<<符号后，意思是分界符后的内容将被当做标准输入传给<<前面的命令，直到再次在独立的一行遇到这个文件分界符。
+> cat命令：用来实现一些多行的屏幕输入或者创建一些临时文件
+> EOF
+EOF：文件分界符紧跟在<<符号后，意思是分界符后的内容将被当做标准输入传给<<前面的命令，直到再次在独立的一行遇到这个文件分界符。
+cat命令：用来实现一些多行的屏幕输入或者创建一些临时文件 
+```
+
+
+把输出追加到文件： 
+
+```bash
+# 写法一：(没有out.txt文件，会创建)
+$ cat<<EOF>out.txt
+> www.mengyueping.com
+> Hello world
+> EOF
+```
+
+```bash
+$ cat out.txt
+www.mengyueping.com
+Hello world
+```
+
+```bash
+# 写法二：
+$ cat>out.txt<<EOF
+> mengyueping.com
+> Hello Web
+> EOF
+```
+
+```bash
+$ cat out.txt
+mengyueping.com
+Hello Web
+```
+
+
+`cat>filename` 创建文件， 并把标准输入输出到 filename 文件中， 以 `ctr+d` 作为输入结束。
+
+```bash
+$ cat>meng
+www.mengyueping.com
+personal web
+
+$ cat meng
+www.mengyueping.com
+personal web
+```
 
 
 
