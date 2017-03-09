@@ -316,6 +316,52 @@ exit 0
 ```
 
 
+一些特殊的惯用法 ： 
+
+
+`()`  一对括号一般用于求取括号中表达式的值或命令的执行结果， 
+如： (a=hello;echo$a), 其作用相当于 `...` 。
+
+`:` 有两个含义， 一是表示空语句， 有点类似于C语言中的单个 ";" 。 
+表示该行是一个空命令， 如果被用在 `while/until` 的头结构中， 则表示值0， 会使循环一直进行下去， 如下：
+
+```bash
+while:
+do 
+    operation-1
+    operation-2
+    ...
+    operation-n
+done
+```
+
+还可以用于求取后面变量的值， 比如：
+
+```bash
+#!/bin/bash
+
+:${HOSTNAME?}{USER?}{MAIL?}
+echo $HOSTNAME
+echo $USER
+echo $MAIL
+
+exit 0
+```
+
+在 Bash 中 `export ` 命令用于将系统变量输出到外层的 Shell 中了。
+
+
+
+Bash 程序的调试： 
+用 `bash -x bash-script` 命令 ， 可以查看一个出错的 Bash 脚本到底错在什么地方， 可以帮助程序员找出脚本中的错误。
+另外用 trap 语句可以在 bash 脚本出错退出时 打印出一些变量的值， 以供程序员检查。 
+trap 语句必须作为继 "#!/bin/bash" 后的第一句非注释代码， 
+一般 trap 命令被写作： `trap 'message $checkvar1 $checkvar2' EXIT` 。
+
+
+
+
+
 
 
 
