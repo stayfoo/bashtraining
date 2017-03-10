@@ -1,8 +1,13 @@
 # #!/bin/bash
 
-# MYDATE="date+%d/%m/%Y"
-# THIS_HOST="hostname"
-# USER="www.mengyueping.com"
+# MYDATE=`date +%d/%m/%Y`
+MYDATE=`date -f`
+THIS_HOST="hostname"
+USER="www.mengyueping.com"
+
+echo $MYDATE
+echo $THIS_HOST
+echo $USER
 
 # while :
 # do
