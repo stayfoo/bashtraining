@@ -35,7 +35,7 @@ EOF
         H|h)
             cat<<EOF
             This is the help screen, nothing here yet to help your!
-EOF
+EOF    # 下面一行 一定要空一行。 
 
             ;;
         Q|q) exit 0

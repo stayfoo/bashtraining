@@ -2,12 +2,12 @@
 
 # 俄罗斯方块 （Tetris Game ）
 
-#APP declaration
+# APP declaration
 APP_NAME="俄罗斯方块（Tetris Game）"  # 游戏名字
 APP_VERSION="1.0"                  # 版本号
 APP_FILE_NAME="${0##*[\\/]}"       # 程序文件的名字
 
-#颜色定义
+# 颜色定义
 cRed=1
 cGreen=2
 cYellow=3
