@@ -365,6 +365,8 @@ trap 语句必须作为继 "#!/bin/bash" 后的第一句非注释代码，
 >`EOF`： 文件分界符紧跟在`<<`符号后，
 >意思是：分界符后的内容将被当做标准输入传给 `<<` 前面的命令， 直到再次在独立的一行遇到这个文件分界符。
 >
+>`EOF`:  下面必须有空出一行。
+>
 >`cat`命令： 用来实现一些多行的屏幕输入或者创建一些临时文件  
 
 ```bash
@@ -386,6 +388,7 @@ $ cat<<EOF>out.txt
 > www.mengyueping.com
 > Hello world
 > EOF
+
 ```
 
 ```bash
@@ -400,6 +403,7 @@ $ cat>out.txt<<EOF
 > mengyueping.com
 > Hello Web
 > EOF
+
 ```
 
 ```bash
