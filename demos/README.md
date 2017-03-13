@@ -427,6 +427,117 @@ personal web
 
 
 
+Shell 是核心程序 （kernel） 之外的指令解析器， 是一个程序， 同时是一种命令语言和程序设计语言。 
+
+查看所有的 shell :
+
+```bash
+$ cat /etc/shells
+
+# List of acceptable shells for chpass(1).
+# Ftpd will not allow users to connect who are not using
+# one of these shells.
+
+/bin/bash
+/bin/csh
+/bin/ksh
+/bin/sh
+/bin/tcsh
+/bin/zsh
+```
+
+默认的 `shell` ：
+
+```bash
+$ echo $SHELL
+/bin/bash
+```
+
+修改权限后运行： 
+
+```bash
+$ chmod +x ./t.sh  # 使脚本具有执行权限
+./t.sh       # 当前目录下，执行脚本
+```
+
+查看文件的 `MD5` 值 ：
+
+```bash
+md5sum <file>
+```
+
+执行脚本并显示所有变量的值 ： 
+
+```bash
+sh -x a.sh
+```
+
+不执行脚本， 只是检查语法模式， 将返回所有的语法错误 ： 
+
+```bash
+sh -n a.sh
+```
+
+
+```bash
+# 创建目录 docName 目录的名字
+$ mkdir docName
+# 进入到 docName 目录中
+$ cd docName 
+# 创建文件 
+$ touch test.txt
+```
+
+脚本解释器 ： 
+
+`sh`  : `Bourne shell` ， `POSIX` （ `Portable Operating System Interface` ） 标准的 shell 解释器，
+它的二进制文件路径通常是 `/bin/sh` 。 
+
+`bash` : `Bourne shell` 的替代品， 属 `GNU Project` ， 二进制文件路径通常是 `/bin/bash` 。
+
+在 CentOS 里， `/bin/sh` 是一个指向 `/bin/bash` 的符号链接 ： 
+
+```bash
+[root@centosraw ~]# ls -l /bin/*sh
+-rwxr-xr-x. 1 root root 903272 Feb 22 05:09 /bin/bash
+-rwxr-xr-x. 1 root root 106216 Oct 17  2012 /bin/dash
+lrwxrwxrwx. 1 root root      4 Mar 22 10:22 /bin/sh -> bash
+```
+
+在 `Mac OS` 上， `/bin/sh` 和 `/bin/bash` 是两个不同的文件， 尽管它们的大小只相差 100 字节左右： 
+
+```bash
+$ ls -l /bin/*sh
+-r-xr-xr-x  1 root  wheel   628496  7  9  2016 /bin/bash
+-rwxr-xr-x  1 root  wheel   378624  7  9  2016 /bin/csh
+-r-xr-xr-x  1 root  wheel  1394432  7  9  2016 /bin/ksh
+-r-xr-xr-x  1 root  wheel   632672  7  9  2016 /bin/sh
+-rwxr-xr-x  1 root  wheel   378624  7  9  2016 /bin/tcsh
+-rwxr-xr-x  1 root  wheel   573600  7  9  2016 /bin/zsh
+```
+
+
+>`shell` 使用场景 ： 
+>
+> 如果你觉得自己熟悉的语言 （如Java、C）写 shell 脚本实在太啰嗦， 
+> 只是想做一些备份文件、安装文件、下载数据之类的事情，学着使用 sh , bash 会是一个好注意。
+> 脚本提供给用户使用， 使用 sh 或者 bash ， 脚本将具有最好的环境兼容性。 
+>
+>
+> `shell` 只定义了一个非常简单的编程语言， 
+> 所以， 如果你的脚本程序复杂度较高， 或者要操作的数据结构比较复杂，
+> 那么还是应该使用 `Python` 、 `Perl` 这样的脚本语言， 或者是你本来就已经很擅长的高级语言。 
+> 因为sh 和bash这方面很弱，比如：
+> 1、它的函数只能返回字符串， 无法返回数组 。   
+> 2、它不支持面向对象， 你无法实现一些优雅的设计模式   
+> 3、它是解释型， 一边解释一边执行， 连 PHP 那种预编译都不是，
+>  如果你的脚本包含错误 （例如调用了不存在的函数）， 只要没执行到这一行，就不会报错。
+>  
+>
+
+
+
+
 
 
 
