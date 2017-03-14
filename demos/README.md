@@ -495,7 +495,7 @@ $ touch test.txt
 
 `bash` : `Bourne shell` 的替代品， 属 `GNU Project` ， 二进制文件路径通常是 `/bin/bash` 。
 
-在 CentOS 里， `/bin/sh` 是一个指向 `/bin/bash` 的符号链接 ： 
+在 `CentOS` 里， `/bin/sh` 是一个指向 `/bin/bash` 的符号链接 ： 
 
 ```bash
 [root@centosraw ~]# ls -l /bin/*sh
@@ -534,6 +534,228 @@ $ ls -l /bin/*sh
 >  如果你的脚本包含错误 （例如调用了不存在的函数）， 只要没执行到这一行，就不会报错。
 >  
 >
+
+
+
+命令别名 （`alias`） 
+`alias` 命令实现： 
+显示当前shell进程所有可用的命令别名：
+
+```bash
+# 命令别名. 执行 ls 命令 相当于执行命令 ls -G
+bogon:~ apple$ alias
+alias ls='ls -G'
+alias mysql='/usr/local/mysql/bin/mysql'
+alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
+```
+
+`alias NAME='VALUE'` 
+定义别名 NAME ， 其相当于执行命令 VALUE  
+
+> 注意： 在命令行中定义的别名， 仅对当前 shell 进程有效； 
+> 如果想永久有效， 要定义在配置文件中。
+> 仅对当前用户： `~/.bashrc` ， 对所有用户有效： `/etc/bashrc`   .
+> 编辑配置给出的新配置不会立即生效。
+
+bash 进程重新读取配置文件 ： 
+
+```bash
+source /path/to/config_file
+. /path/to/config_file
+```
+
+
+撤销别名 `unalias` : 
+
+```bash
+unalias [-a] name [name ...]
+```
+
+> 如果别名同原命名的名称， 则如果要执行原命令， 可使用 "`\COMMAND`" 。
+
+
+`glob` ： 
+bash 中用于实现文件名“通配” 。
+
+
+`通配符` ： 
+
+`*`    任意长度的任意字符 。  
+`?`    任意单个字符 。
+`[]`   匹配指定范围内的任意单个字符 。  
+
+> `[0-9]` 
+> `[a-z]` : 不区分字符大小写
+
+`[^]`   匹配指定范围外的任意单个字符。    
+
+> `[^0-9]`
+
+
+专用字符集合 ： 
+
+`[:digit:]`   任意数字， 相当于0-9
+`[:lower:]`   任意小写字母  
+`[:upper:]`   任意大写字母
+`[:alpha:]`   任意大小写字母
+`[:alnum:]`   任意数字或字母
+`[:space:]`   空格符号
+`[:punct:]`   标点符号 
+
+
+
+Bash 快捷键：  
+
+`Ctrl + l`  ： 清屏， 相当于 `clear` 命令 .
+
+`Ctrl + a`  ： 跳转至命令开始处  .
+
+`Ctrl + e`  ： 跳转至命令结尾处  .
+
+`Ctrl + c`  ： 取消命令的执行 .
+
+`Ctrl + u`  ： 删除命令行行首至光标处的所有内容 .
+
+`Ctrl + k`  ： 删除光标所在处至命令行行尾的所有内容 .
+
+
+
+Bash 的 I/O 重定向及管道 ： 
+
+> 打开的文件都有一个  `fd :file descriptor (文件描述符)` ， 
+> 及用来描述一个文件的标识符号， 其中存放着一些特性信息。 
+
+重定向分类： 
+> 标准输入 ：    keyborad  , 0
+> 标准输出 ：    monitor   , 1   
+> 标准错误输出 ： monitor   , 2   
+
+
+输出重定向 ： 
+
+格式： `COMMAND > NEW_POS, COMMAND >> NEW_POS`  
+
+
+相关标示： 
+
+`>`  :  覆盖重定向， 目标文件中的原有内容会被清除；
+
+`>>` :  追加重定向， 新内容会追加至目标文件尾部； 
+
+`set -C` :  禁止将内容覆盖输出至已有文件中； 强制覆盖 : >|  
+
+`set +C` :  打开 。
+
+`2>`  : 覆盖重定向错误输出数据流；
+
+`2>>` : 追加重定向错误输出数据流； 
+
+标准输出和错误输出各自定向至不同位置 ： 
+`COMMAND > /path/to/file.out 2> /path/to/error.out`  
+
+
+合并标准输出和错误输出为同一个数据流进行重定向 ： 
+
+`&>`  : 覆盖重定向 。
+
+`&>>` : 追加重定向 。
+
+`COMMAND > /path/to/file.out 2> &1`
+
+`COMMAND >> /path/to/file.out 2>> &1`   
+
+输入重定向： 
+
+```bash
+cat << EOF
+cat > /path/to/somefile << EOF
+```
+
+
+管道、tr命令、tee命令  ： 
+
+管道 ： 
+`COMMAND1 | COMMAND2 | COMMAND3 |...`
+
+> 最后一个命令会在当前shell进程的子shell进程中执行。  
+
+`tr`命令： 
+转换或删除字符.
+`tr [OPTION]... SET1 [SET2]`
+
+
+`tee`命令：  
+`tee [OPTION]... [FILE]...`
+
+```
+将登录至当前系统上用户信息中的后3行的信息， 
+转换为大写后保存至 /tmp/who.out 文件中；
+# who | tail -n 3 | tr 'a-z' 'A-Z' > /tmp/who.out
+```
+
+文本处理工具： 
+
+`wc`命令： 
+
+格式： `wc [OPTION]... [FILE]...` 
+
+参数选项：  
+
+`-l`  : lines  
+
+`-w`  : words
+
+`-c`  : characters
+ 
+`cut`命令：  
+
+格式： `cut [OPTION]... [FILE]...`
+
+参数选项： 
+
+* `-d DELIMITER`  ： 指明分隔符。
+
+* `-f FILEDS`  ： 
+    * `#`  第`#`个字段 
+    * `#,#[,#]`   离散的多个字段， 例如 1，3，6
+    * `#-#`  连续的多个字段， 例如： 1-6
+    * 混合使用： 1-3,7
+
+
+`sort`命令 ： 
+
+格式 :  `sort [OPTION]... [FILE]...`
+
+参数选项： 
+
+`-f` ： 忽略字符大小写  
+
+`-r` ：  逆序
+
+`-t DELIMITER` 字段分隔符  
+
+`-k #`  以指定字段为标准排序 
+
+`-n`  以数值大小进行排序  
+
+`-u`  排序后，去重复
+
+
+
+`uniq` 命令： 
+
+格式： `uniq [OPTION]... [FILE]...`
+
+参数选项： 
+
+`-c`  :   显示每行重复出现的次数；  
+
+`-d`  :   仅显示重复过的行； 
+
+`-u`  :   仅显示不曾重复的行；  
+
+连续且完全相同方位重复 。   
+
 
 
 
