@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 MAX_NO=0
 
 echo -n "输入数字 5-9 之间："
